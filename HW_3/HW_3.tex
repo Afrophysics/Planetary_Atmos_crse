@@ -1,0 +1,544 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{HW\_3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Earth 164 Planetary Atmospheres HW
+3}\label{earth-164-planetary-atmospheres-hw-3}
+
+\subsubsection{Jesus Javier Serrano}\label{jesus-javier-serrano}
+
+\paragraph{2/6/19}\label{section}
+
+\subsection{Bake the atmosphere from
+bottom}\label{bake-the-atmosphere-from-bottom}
+
+Suppose an observation is being made on the planetary atmosphere of a
+gas giant whose main source of heat energy is from the internal
+radiation flux coming from the surface of the planet. The atmosphere is
+composed of Hydrogen gas which is a diatomic molecule with the adiabatic
+index being \(\gamma = \frac{7}{5}\) and a collision-induced absorption
+opacity of \(\tau = A p^2\) where \(A\) is a constant and \(p\) is
+pressure. An intrinsic flux \(F\) seeps out of the surface and radiates
+towards the atmosphere. In order to calculate the temperature profile of
+the air parcel within the atmosphere we must first apply a two-flow
+model. This model states that for any incoming intensity \(I\) that
+interacts with the atmosphere, a reflecting \(I^{-}\) and transmitting
+ray \(I^{+}\) is radiated from the interaction where
+\(I = I^{+} + I^{-}\). We shall also assume that the atmosphere is in
+monochromative equilibrium so that
+\(\frac{\partial F}{\partial z} = 0\). A blackbody distribution was
+applied to the atmosphere in order to state that for any radiation that
+is absorbed from the atmosphere, it is radiated out again as blackbody
+radiation \(B_{\nu}\). Thus, focusing in a single frequency of light:
+\[I^{+}_{\nu} = B_{\nu}(T) + \frac{1}{2\pi}F_{\nu}\]
+\[I^{-}_{\nu} = B_{\nu}(T) - \frac{1}{2\pi}F_{\nu}\] Recall that for any
+radiative transfer within a system, the following equation must hold
+true:
+\[\mu \frac{\partial I_{\nu}}{\partial \tau_{\nu}} = - I_{\nu} + S_{\nu}\]
+where in this case our only source of radiation is the planet's surface
+which acts as a blackbody, so \(S_{\nu} = B_{\nu}\). In this image we
+will focus in three areas of interests: \(S_1, S_2, S_3\). In \(S_1\)
+the surface emits energy with intensity \(I_g\). The energy flux is
+scattered into two flux beams, \(I_g^+\) emitting upward and \(I_g^-\)
+emitting downward. Both intensities are absorbed and remitted as part of
+a blackbody spectrum \(V_{\nu}\) within the atmosphere resulting in a
+net flux \(F\) emitting upward. At the top of the atmosphere there is no
+reflection and only scattering and emission contributes to the net flux
+flowing outwards.
+
+Thus we are able to define the total radiative flux as a function of
+opacity if we are able to solve the differential equation above. Before
+we try to solve the equaiton, we must first define the constraints of
+the system. In order for the greenhouse effect to be true within this
+gas planet, two conditions must apply: 1. The radiative transfer at the
+surface of the planet must result in an upward intensity of
+\(I^{+}_{\nu g} = B_{\nu}(T_1) + \frac{1}{2\pi}F_{\nu} = B_{\nu}(T_g)\).
+2. At the top of the atmosphere the net flux must result from upward
+going fluxes which means that \(I^{-}_{\nu 0} = 0\) 3.
+\(\frac{\partial F}{\partial \tau} = 0\) with no gradient on the
+magnitude of the flux along the height of the atmosphere
+
+With these conditions we are now able to define a singular solution for
+the temperature profile of the atmosphere. First, we know that the net
+normal flux from radiation as a function of intensity and the
+infinitesimal scattering solid angle \(d\Omega\) is:
+\[F = \int I \cos(\theta) d\Omega= \int I \cos(\theta) \sin(\theta) d\theta d\psi\]
+For simplicity a substitution is defined such that
+\[\mu = \cos(\theta)\] and \$d \mu = -\sin(\theta) d\theta \$ so:
+\[F = \int_{0}^{2\pi} \int_{0}^{\pi} I \cos(\theta) \sin(\theta) d\theta d\psi = \int_{0}^{2\pi} \int_{-1}^{1} I \mu d\mu d\psi.\]
+Now let us use Eddington's method of solving this equation and determine
+the solution. First we may apply a first order approximation to the
+scattered intensity so that: \[I = I_o + \mu I_1\] where I\_o and I\_1
+are seperate expansion terms that are independent of \(\mu\). The
+radiative flux can now be defined as such:
+\[F = \int_{0}^{2\pi} \int_{-1}^{1}  \mu(I_o + \mu I_1 )d\mu d\psi = 2 \pi * (\frac{2 I_1}{3})\]
+The integral wasn't that hard and we can actually take advantage of the
+fact that \(\mu\) is an orthonormal function being integrated within a
+period. Thus, let us define the solid angle integral as a weighting
+function such that:
+\[<1> = \int_{0}^{2\pi} \int_{-1}^{1} d\mu d\psi = 4 \pi\]
+\[<I> = \int_{0}^{2\pi} \int_{-1}^{1} (I_o + \mu I_1 )d\mu d\psi = 4 \pi I_o\]
+\[<\mu^1 I> = \int_{0}^{2\pi} \int_{-1}^{1} \mu(I_o + \mu I_1 )d\mu d\psi = \frac{4 \pi I_1}{3}= F\]
+\[<\mu^2 I> = \int_{0}^{2\pi} \int_{-1}^{1} \mu^2(I_o + \mu I_1 )d\mu d\psi = \frac{4 \pi I_o}{3}\]
+Now we can apply calculus and build a system of equations that will
+result in a nice equation. Then: 1.
+\[<\mu \frac{\partial I_{\nu}}{\partial \tau_{\nu}}> = <- I_{\nu} + B_{\nu}>\]
+2.
+\[<\mu^2 \frac{\partial I_{\nu}}{\partial \tau_{\nu}}> = <- \mu I_{\nu} + \mu B_{\nu}>\]
+Integrating equaiton 1 results in the following:
+\[<\mu \frac{\partial I_{\nu}}{\partial \tau_{\nu}}> = \frac{\partial <\mu I_{\nu}>}{\partial \tau_{\nu}} = \frac{\partial F}{\partial \tau_{\nu}}  = - 4 \pi I_{\nu o} +4\pi B_{\nu}\]
+Now integrating equation 2 results in:
+\[<\mu^2 \frac{\partial I_{\nu}}{\partial \tau_{\nu}}> = \frac{\partial <\mu^2 I_{\nu}>}{\partial \tau_{\nu}} = \frac{4 \pi}{3}\frac{\partial I_{\nu o}}{\partial \tau_{\nu}}= -F\]
+The flux \(F\) is a result from integrating the odd orthonormal function
+applied to \(B_{\nu}\) thus making it zero and only focusing on the
+intensity. Now that we have our two equations we can now apply
+substitution. For the first modified equation we shall look into the
+derivative relative to the opacity. Thus:
+\[\frac{\partial^2 F}{\partial \tau_{\nu}^2}  = - 4 \pi \frac{\partial I_{\nu o}}{\partial \tau_{\nu}} +4\pi \frac{\partial B_{\nu }}{\partial \tau_{\nu}} \]
+From equation 2 we can substitute \(I_{\nu o }\) with \(F\) and have:
+\[\frac{\partial^2 F}{\partial \tau_{\nu}^2}  = 3F +4\pi \frac{\partial B_{\nu }}{\partial \tau_{\nu}} \]
+In this case we know that
+\(\frac{\partial^2 F}{\partial \tau_{\nu}^2} = 0\) and from the second
+constraint of the atmosphere \(F = 2 \pi B_{\nu}(T_o)\). Thus:
+\[\frac{3}{2} B_{\nu}(T_o) = \frac{\partial B_{\nu }}{\partial \tau_{\nu}}\]
+\[\frac{3}{2} B_{\nu}(T_o) d \tau = d B_{\nu}\] Integrate both sides
+within the interval of optical depth where at the top-edge of the
+atmosphere \(\tau = 0\) and the temperature is set at \(T_o\):
+\[\int_{0}^{\tau}\frac{3}{2} B_{\nu}(T_o) d \tau = \int_{B_{\nu}(T_o)}^{B_{\nu}(\tau)} d B_{\nu}\]
+\[\frac{3}{2} B_{\nu}(T_o) \tau = B_{\nu}(\tau) - B_{\nu}(T_o)\]
+\[ B_{\nu}(T_o)(1 + \frac{3}{2} \tau) = B_{\nu}(\tau)\] Now integrate
+the entire equation over all of velocity space so that
+\(\int_{0}^{\infty}B_{\nu}d\nu = \sigma T^4\) to get:
+\[ \sigma T_o^4(1 + \frac{3}{2} \tau) = \sigma T^4(\tau)\] The final
+relation is found such that the equilibrium radiative temperature as a
+function of optical depth is:
+\[ T_o^4(1 + \frac{3}{2} \tau) = T^4(\tau)\] Temperature as a function
+of pressure is: \[ T_o^4(1 + \frac{3}{2} Ap^2) = T^4(p)\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        
+        
+        \PY{c+c1}{\PYZsh{}Let us define the radiative equilibrium temperature as a function of p:}
+        \PY{k}{def} \PY{n+nf}{Temp}\PY{p}{(}\PY{n}{T\PYZus{}0}\PY{p}{,} \PY{n}{A}\PY{p}{,} \PY{n}{p}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{T\PYZus{}0}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{p}{(}\PY{l+m+mf}{1.5}\PY{o}{*}\PY{n}{A}\PY{o}{*}\PY{p}{(}\PY{n}{p}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{0.25}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{interval\PYZus{}pressure} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}
+        \PY{n}{Temp\PYZus{}0} \PY{o}{=} \PY{l+m+mf}{2.5} \PY{c+c1}{\PYZsh{}mean temperature of the CMB}
+        \PY{n}{A\PYZus{}guess} \PY{o}{=} \PY{l+m+mf}{0.2}
+        \PY{n}{result\PYZus{}temp} \PY{o}{=} \PY{n}{Temp}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{Temp\PYZus{}0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{interval\PYZus{}pressure}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{A\PYZus{}guess}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{interval\PYZus{}pressure}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{interval\PYZus{}pressure}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{result\PYZus{}temp}\PY{p}{,} \PY{n}{interval\PYZus{}pressure}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Units of pressure \PYZdl{}p\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Units of Temperature \PYZdl{}T\PYZus{}}\PY{l+s+si}{\PYZob{}eq\PYZcb{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Radiative Equilibrium Temperature as a function of pressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_1_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Let us analyze the potential temperature profile in order to get a
+cleaner picture of the adiabatic process of the air-parcel in this
+atmosphere. From the third law of thermodynamics we know that:
+\(TdS = C_p dT - VdP\). For an ideal gas we can modify the equation by
+stating the fact that \(V = \frac{nRT}{P}\) at constant temperature.
+Then: \[dS = C_p (\frac{dT}{T} - \frac{nRdP}{C_p P})\] For the ideal
+case of one mole of Hydrogen gas in the atmosphere we further simplify
+the equation by noting the following: If \(g(t) = \ln(x(t)y(t))\) then
+\[d(g(t)) = \frac{x'(t) y(t) + x(t)y'(t)}{x(t)y(t)} = \frac{dx}{x} + \frac{dy}{y}\]
+So: \[\frac{dT}{T} - \frac{nRdP}{C_p P} = d(\ln(T P^{\frac{-R}{C_p}}))\]
+Thus: \[dS = C_pd(\ln(T P^{\frac{-R}{C_p}}))\]
+\[\frac{\triangle S}{C_p} = \ln \left(\frac{T P^{\frac{-R}{C_p}}}{T_o P_o^{\frac{-R}{C_p}}}\right)\]
+\[T_o e^{\frac{\triangle S}{C_p}} = T \left(\frac{P}{P_o}\right)^{\frac{-R}{C_p}} = \theta(T)\]
+Notice that if entropy is held constant within the atmosphere then
+\(\theta(T) = T_o\). In terms of pressure this equation is defined as:
+\[\theta(P) =  T_o(1 + \frac{3}{2} AP^2)^{1/4} \left(\frac{P}{P_o}\right)^{\frac{-R}{C_p}}\]
+Since the atmosphere consists of mainly diatomic Hydrogen then
+\(C_p = \frac{7}{2}R\) and:
+\[\theta(P) =  T_o(1 + \frac{3}{2} AP^2)^{1/4} \left(\frac{P}{P_o}\right)^{\frac{-2}{7}}\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        
+        
+        \PY{c+c1}{\PYZsh{}Let us define the radiative equilibrium temperature as a function of p:}
+        \PY{k}{def} \PY{n+nf}{Temp}\PY{p}{(}\PY{n}{T\PYZus{}0}\PY{p}{,} \PY{n}{A}\PY{p}{,} \PY{n}{p}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{T\PYZus{}0}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{p}{(}\PY{l+m+mf}{1.5}\PY{o}{*}\PY{n}{A}\PY{o}{*}\PY{p}{(}\PY{n}{p}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{0.25}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{pot\PYZus{}Temp}\PY{p}{(}\PY{n}{T\PYZus{}0}\PY{p}{,} \PY{n}{A}\PY{p}{,} \PY{n}{p}\PY{p}{,} \PY{n}{p\PYZus{}o}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{T\PYZus{}0}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{p}{(}\PY{l+m+mf}{1.5}\PY{o}{*}\PY{n}{A}\PY{o}{*}\PY{p}{(}\PY{n}{p}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{0.25}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{p}\PY{o}{/}\PY{n}{p\PYZus{}o}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{interval\PYZus{}pressure} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+        \PY{n}{Temp\PYZus{}0} \PY{o}{=} \PY{l+m+mf}{2.5} \PY{c+c1}{\PYZsh{}mean temperature of the CMB}
+        \PY{n}{A\PYZus{}guess} \PY{o}{=} \PY{l+m+mi}{80000}
+        \PY{n}{result\PYZus{}temp} \PY{o}{=} \PY{n}{Temp}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{Temp\PYZus{}0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{interval\PYZus{}pressure}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{A\PYZus{}guess}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{interval\PYZus{}pressure}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{interval\PYZus{}pressure}\PY{p}{)}
+        \PY{n}{result\PYZus{}pot\PYZus{}temp1} \PY{o}{=} \PY{n}{pot\PYZus{}Temp}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{Temp\PYZus{}0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{interval\PYZus{}pressure}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{A\PYZus{}guess}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{interval\PYZus{}pressure}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{interval\PYZus{}pressure}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{result\PYZus{}pot\PYZus{}temp2} \PY{o}{=} \PY{n}{pot\PYZus{}Temp}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{Temp\PYZus{}0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{interval\PYZus{}pressure}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{A\PYZus{}guess}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{interval\PYZus{}pressure}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{interval\PYZus{}pressure}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+        \PY{n}{result\PYZus{}pot\PYZus{}temp3} \PY{o}{=} \PY{n}{pot\PYZus{}Temp}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{Temp\PYZus{}0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{interval\PYZus{}pressure}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{A\PYZus{}guess}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{interval\PYZus{}pressure}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{interval\PYZus{}pressure}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n}{result\PYZus{}pot\PYZus{}temp4} \PY{o}{=} \PY{n}{pot\PYZus{}Temp}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{Temp\PYZus{}0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{interval\PYZus{}pressure}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{A\PYZus{}guess}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{interval\PYZus{}pressure}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{interval\PYZus{}pressure}\PY{p}{,} \PY{l+m+mi}{500}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{result\PYZus{}temp}\PY{p}{,} \PY{n}{interval\PYZus{}pressure}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{result\PYZus{}pot\PYZus{}temp1}\PY{p}{,} \PY{n}{interval\PYZus{}pressure}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{theta\PYZdl{} \PYZdl{}p\PYZus{}o\PYZdl{} = 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{result\PYZus{}pot\PYZus{}temp2}\PY{p}{,} \PY{n}{interval\PYZus{}pressure}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{theta\PYZdl{} \PYZdl{}p\PYZus{}o\PYZdl{} = 10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{result\PYZus{}pot\PYZus{}temp3}\PY{p}{,} \PY{n}{interval\PYZus{}pressure}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{theta\PYZdl{} \PYZdl{}p\PYZus{}o\PYZdl{} = 100}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{result\PYZus{}pot\PYZus{}temp4}\PY{p}{,} \PY{n}{interval\PYZus{}pressure}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{theta\PYZdl{} \PYZdl{}p\PYZus{}o\PYZdl{} = 500}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Units of pressure \PYZdl{}p\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Units of Temperature \PYZdl{}T\PYZus{}}\PY{l+s+si}{\PYZob{}eq\PYZcb{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Radiative Equilibrium Temperature as a function of pressure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Jesus\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\_launcher.py:11: RuntimeWarning: divide by zero encountered in power
+  \# This is added back by InteractiveShellApp.init\_path()
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Notice that the temperature profile shown above depicts the temperature
+of the parcel increasing as height decreases. The potential temperature
+profile for four difference reference pressures \(P_o\) are shown as
+dotted lines. An increasing trend is shown along the radiative
+equilibirum temperature as pressure increases. Since pressure is
+inveresely proportional to height, where minimum pressure of the
+atmosphere is reached at a maximum height and maximum pressure is
+reached at the minimum height, all potential temperature profiles
+illustrate an increasing trend relative to increasing height. This
+results in an unstable equilibrium where an airparcel will flow towards
+lower pressure along the temperature profile given an initial
+perturbation. The instability results in the atmosphere being dominated
+by convection which is constrained by the top of the atmosphere. In this
+example we look at the case of the effective pressure being 500 Pa. The
+red arrows show the perturbation along the temperature profile. The red
+arrows show the adaibatic flow of the air parcel after the perturbation
+is set. Since the temperature profile of the gas is greater than the
+potential temperature profile, and since we mentioned earlier that there
+is an increasing trend in temperature and pressure, then the
+perturbation makes the air parcel unstable forcing it to flow to the top
+of the atmosphere in an adiabatic expansion process. Radiative energy
+transfer will only dominate the atmosphere below 500 Pa and convection
+will dominate the atmosphere above 500 Pa. Since particle density, and
+therefore pressure, is an exponential function dependent on height, then
+this implies that the majority of the atmosphere is dominated by
+convection. We can prove this by looking into the rate of change of the
+potential temperature relatived to pressure:
+\[\frac{\partial \theta}{\partial P} = \frac{\partial T}{\partial P}\left( \frac{P}{P_o}\right)^{-\frac{2}{7}} - \frac{2}{7}T \left( \frac{P}{P_o}\right)^{-\frac{2}{7} - 1}(\frac{1}{P_o})\]
+\[\frac{\partial \theta}{\partial P} = \theta \left( \frac{1}{T}\frac{\partial T}{\partial P} - \frac{2}{7}(\frac{1}{P}) \right)\]
+Note that
+\(\frac{\partial T}{\partial P} = \frac{3A T_o P}{4}(1 + \frac{3}{2}AP^2)^{-\frac{3}{4}} = \frac{3A T P}{4(1 + \frac{3}{2}AP^2)}\).
+Then:
+\[\frac{\partial \theta}{\partial P} = \theta \left( \frac{3A P}{4(1 + \frac{3}{2}AP^2)} - \frac{2}{7}(\frac{1}{P}) \right)\]
+\[\frac{\partial \theta}{\partial P} = T_o(1 + \frac{3}{2} AP^2)^{1/4} \left(\frac{P}{P_o}\right)^{\frac{-2}{7}} \left( \frac{3A P}{4(1 + \frac{3}{2}AP^2)} - \frac{2}{7}(\frac{1}{P}) \right)
+\] Notice how as P approaches a large magnitude, the rate of change of
+the potential energy and therefore the adiabatic rate of the air parcel
+reaches a net value of zero. As P approaches a small magnitude, the rate
+of change abruptly changes negative and thus implies a decreasing
+potential temperature as height increases. This proves that radiative
+energy transfer is the dominant source of energy transfer above a
+certain critical pressure, and convection is dominant source of energy
+transfer below this critical pressure.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
